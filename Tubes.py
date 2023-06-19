@@ -6,7 +6,7 @@ def insertion_sort(arr):
             arr[j + 1] = arr[j]
             j -= 1
         arr[j + 1] = key
-
+        
 def daftar_film():
     print("Daftar Film: ")
     print("1. Sewu Dino (Rp. 30.000)")
