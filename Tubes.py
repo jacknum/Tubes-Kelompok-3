@@ -53,5 +53,21 @@ def book_tickets(film, jam, hitung_kursi):
         tempat_duduk.remove(kursi_pilihan_duduk)
         kursi_pilihan.append(kursi_pilihan_duduk)
 
-    nama_penggunjung = input("Masukkan nama Anda: ")
+    nama_pengunjung = input("Masukkan nama Anda: ")
     
+    print("Transaksi berhasil!")
+    print(f"Atas nama: {nama_pengunjung}")
+    print(f"Film: {film}")
+    print(f"Jam Tayang: {jam}")
+    print("Kursi: ", end="")
+    print(*kursi_pilihan_duduk, sep=", ")
+    print("Total Pembayaran: Rp.", hitung_kursi * mengambil_harga_film(film))
+
+def mengambil_harga_film(film):
+    harga_film = {
+        "1": 30000,
+        "2": 35000,
+        "3": 40000,
+        "4": 30000
+    }
+    return harga_film.get(film, 0)
