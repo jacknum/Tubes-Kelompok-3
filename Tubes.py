@@ -39,14 +39,13 @@ def pesan_tiket(film, jam, hitung_kursi, kursi_terpesan, pilihan_kursi):
     pesanan_kursi = []
     for _ in range(hitung_kursi):
         while True:
-            kursi_pilihan = int(input("Pilih kursi (masukkan nomor kursi) ('x' untuk kembali): "))
-            if kursi_pilihan == 'x':
-                break
-            elif kursi_pilihan in kursi_terpesan:
+            kursi_pilihan = int(input("Pilih kursi (masukkan nomor kursi): "))
+            if kursi_pilihan in kursi_terpesan:
                 print("Kursi telah dipilih dan dipesan.")
             elif kursi_pilihan < 1 or kursi_pilihan > len(kursi) * len(kursi[0]):
                 print("Kursi tidak valid.")
             else:
+                kursi_terpesan.append(kursi_pilihan)  # Menambahkan kursi yang terpesan
                 pesanan_kursi.append(kursi_pilihan)
                 break
             
@@ -84,12 +83,12 @@ def main():
         pilihan_film = input("Pilih nomor film: ")
         
         if lihat_waktu_tayang(pilihan_film):
-            jam_choice = input("Pilih nomor jam tayang: ")
+            jam_choice = input("Pilih jam tayang: ")
             hitung_kursi = int(input("Berapa kursi yang Anda butuhkan? "))
             
             if pilihan_film in jam_tayang and jam_choice in jam_tayang[pilihan_film]:
-                if pesan_tiket(pilihan_film, jam_choice, hitung_kursi, kursi, pilihan_kursi):
-                    break  # Break the loop if the ticket is successfully booked
+                if pesan_tiket(pilihan_film, jam_choice, hitung_kursi, kursi_terpesan, pilihan_kursi):
+                    break
             else:
                 print("Pilihan film atau jam tayang tidak valid.")
         else:
@@ -112,5 +111,6 @@ kursi = [
     [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 ]
 pilihan_kursi = []
+kursi_terpesan = []
 
 main()
