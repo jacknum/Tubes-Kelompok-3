@@ -8,7 +8,7 @@ def insertion_sort(arr):
         arr[j + 1] = key
         
 def daftar_film():
-    print("Daftar Film Yang Tayang: ")
+    print("\nDaftar Film:")
     print("1. Sewu Dino (Rp. 30.000)")
     print("2. The Little Mermaid (Rp. 35.000)")
     print("3. The Big 4 (Rp. 40.000)")
@@ -21,33 +21,53 @@ def lihat_waktu_tayang(film):
         print("Jam Tayang:")
         for i, jam in enumerate(waktu):
             print(f"{i + 1}. {jam}")
+        return True
     else:
         print("Film tidak valid.")
-
-def pesan_tiket(film, jam, hitung_kursi, kursi, pilihan_kursi):
-    print("Tempat Duduk yang Tersedia:")
-    print(kursi)
-    n = 0
-    while n < (hitung_kursi):
-        pilih = input("Masukkan Nomor Kursi! : ")
-        if pilih in kursi:
-            kursi.remove(pilih)
-            pilihan_kursi.append(pilih)
-            n += 1
-        elif pilih not in kursi:
-            print("Kursi telah dipesan")
-    print("Kursi berhasil dipesan")
-
-    nama_pengunjung = input("Masukkan nama Anda: ")
+        return False
     
-    print("Transaksi berhasil!")
-    print(f"Atas nama: {nama_pengunjung}")
-    print(f"Film: {film}")
-    print(f"Jam Tayang: {jam}")
-    print("Kursi: ", end="")
-    print(*pilihan_kursi, sep=", ")
-    print("Total Pembayaran: Rp.", hitung_kursi * ambil_harga_film(film))
-
+def pesan_tiket(film, jam, hitung_kursi, kursi_terpesan, pilihan_kursi):
+    print("Tempat Duduk yang Tersedia:")
+    for row in kursi:
+        for seat in row:
+            if seat in kursi_terpesan:
+                print("X", end=" ") 
+            else:
+                print(seat, end=" ")
+        print()
+        
+    pesanan_kursi = []
+    for _ in range(hitung_kursi):
+        while True:
+            kursi_pilihan = int(input("Pilih kursi (masukkan nomor kursi) ('x' untuk kembali): "))
+            if kursi_pilihan == 'x':
+                break
+            elif kursi_pilihan in kursi_terpesan:
+                print("Kursi telah dipilih dan dipesan.")
+            elif kursi_pilihan < 1 or kursi_pilihan > len(kursi) * len(kursi[0]):
+                print("Kursi tidak valid.")
+            else:
+                pesanan_kursi.append(kursi_pilihan)
+                break
+            
+    if len(pesanan_kursi) == hitung_kursi:
+        pilihan_kursi.extend(pesanan_kursi)  # Menambahkan pesanan kursi ke dalam pilihan_kursi
+        nama_pengunjung = input("Masukkan nama Anda: ")
+        total_harga = hitung_kursi * ambil_harga_film(film)
+        if hitung_kursi > 5:
+            diskon = total_harga * 0.05  # Menghitung jumlah diskon (5% dari total harga)
+            total_harga -= diskon  # Mengurangi jumlah diskon dari total harga
+        print("\nTransaksi berhasil!")
+        print(f"Atas nama: {nama_pengunjung}")
+        print(f"Film: {film}")
+        print(f"Jam Tayang: {jam}")
+        print("Kursi: ", end="")
+        print(*pilihan_kursi, sep=", ")
+        print("Total Pembayaran: Rp.", total_harga)
+    else:
+        print("Jumlah kursi yang dipesan tidak sesuai dengan jumlah tiket.")
+        return False
+    
 def ambil_harga_film(film):
     harga_film = {
         "1": 30000,
@@ -59,46 +79,38 @@ def ambil_harga_film(film):
 
 def main():
     while True:
-        print("\nSelamat Datang di Gabut Movie")
+        print("\n<======== Selamat Datang Di Gabut Chinema ========>")
         daftar_film()
-        pilihan_film = input("Pilih Nomor Film : ")
-        lihat_waktu_tayang(pilihan_film)
-
-        pilihan_waktu = input("Pilih Nomor Jam Tayang : ")
-        hitung_kursi = int(input("Berapa Kursi Yang Ingin Anda Pesan? : "))
-        while True:
-            if pilihan_film == "1":
-                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi1)
-                break
-            elif pilihan_film == "1":
-                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi2)
-                break
-            elif pilihan_film == "1":
-                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi3)
-                break
-            elif pilihan_film == "1":
-                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi4)
-                break
+        pilihan_film = input("Pilih nomor film: ")
+        
+        if lihat_waktu_tayang(pilihan_film):
+            jam_choice = input("Pilih nomor jam tayang: ")
+            hitung_kursi = int(input("Berapa kursi yang Anda butuhkan? "))
+            
+            if pilihan_film in jam_tayang and jam_choice in jam_tayang[pilihan_film]:
+                if pesan_tiket(pilihan_film, jam_choice, hitung_kursi, kursi, pilihan_kursi):
+                    break  # Break the loop if the ticket is successfully booked
             else:
-                print("Pilihan Anda Tidak Valid")
-                continue
-        restart = input("Apakah Anda Ingin Melanjutkan (y/n)? : ")
+                print("Pilihan film atau jam tayang tidak valid.")
+        else:
+            print("Pilihan film tidak valid.")
+            
+        restart = input("Apakah Anda ingin melanjutkan (y/n)? ")
         if restart.lower() != "y":
-            print("Terima Kasih Telah Memesan")
+            print("<========Terima Kasih telah memesan. Happy Watching========>")
             break
-
+        
 jam_tayang = {
     "1": ["08:00", "16:00", "20:00"],
     "2": ["10:00", "13:00", "20:00"],
     "3": ["22:00", "15:00", "09:00"],
-    "1": ["08:00", "20:00",],
+    "4": ["08:00", "20:00"]
 }
-kursi1 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
-kursi2 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
-kursi3 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
-kursi4 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
-pilihan_kursi1 = []
-pilihan_kursi2 = []
-pilihan_kursi3 = []
-pilihan_kursi4 = []
+kursi = [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+    [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+]
+pilihan_kursi = []
+
 main()
