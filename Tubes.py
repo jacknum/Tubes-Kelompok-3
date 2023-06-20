@@ -48,9 +48,9 @@ def pesan_tiket(film, jam, hitung_kursi, kursi, pilihan_kursi):
     print(f"Jam Tayang: {jam}")
     print("Kursi: ", end="")
     print(*pilihan_kursi, sep=", ")
-    print("Total Pembayaran: Rp.", hitung_kursi * mengambil_harga_film(film))
+    print("Total Pembayaran: Rp.", hitung_kursi * ambil_harga_film(film))
 
-def mengambil_harga_film(film):
+def ambil_harga_film(film):
     harga_film = {
         "1": 30000,
         "2": 35000,
@@ -58,3 +58,29 @@ def mengambil_harga_film(film):
         "4": 30000
     }
     return harga_film.get(film, 0)
+
+def main():
+    while True:
+        print("\nSelamat Datang di Gabut Movie")
+        daftar_film()
+        pilihan_film = input("Pilih Nomor Film : ")
+        lihat_waktu_tayang(pilihan_film)
+
+        pilihan_waktu = input("Pilih Nomor Jam Tayang : ")
+        hitung_kursi = int(input("Berapa Kursi Yang Ingin Anda Pesan? : "))
+        while True:
+            if pilihan_film == "1":
+                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi1)
+                break
+            elif pilihan_film == "1":
+                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi2)
+                break
+            elif pilihan_film == "1":
+                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi3)
+                break
+            elif pilihan_film == "1":
+                pesan_tiket(pilihan_film, pilihan_waktu, hitung_kursi, kursi4)
+                break
+            else:
+                print("Pilihan Anda Tidak Valid")
+                continue
