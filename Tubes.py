@@ -26,27 +26,19 @@ def lihat_waktu_tayang(film):
     else:
         print("Film tidak ada.")
 
-def book_tickets(film, jam, hitung_kursi):
-    limit_kursi = 30
-    tempat_duduk = list(range(1, limit_kursi + 1))
-    kursi_pilihan = []
-
-    if hitung_kursi > limit_kursi:
-        print("Jumlah kursi melebihi batas.")
-        return
-
+def pesan_tiket(film, jam, hitung_kursi, kursi, pilihan_kursi):
     print("Tempat Duduk yang Tersedia:")
-    print(tempat_duduk)
-
-    for _ in range(hitung_kursi):
-        kursi_pilihan_duduk = int(input("Pilih nomor kursi: "))
-
-        if kursi_pilihan_duduk not in tempat_duduk:
-            print("Kursi tidak tersedia.")
-            return
-        
-        tempat_duduk.remove(kursi_pilihan_duduk)
-        kursi_pilihan.append(kursi_pilihan_duduk)
+    print(kursi)
+    n = 0
+    while n < (hitung_kursi):
+        pilih = input("Masukkan Nomor Kursi! : ")
+        if pilih in kursi:
+            kursi.remove(pilih)
+            pilihan_kursi.append(pilih)
+            n += 1
+        elif pilih not in kursi:
+            print("Kursi telah dipesan")
+    print("Kursi berhasil dipesan")
 
     nama_pengunjung = input("Masukkan nama Anda: ")
     
@@ -55,7 +47,7 @@ def book_tickets(film, jam, hitung_kursi):
     print(f"Film: {film}")
     print(f"Jam Tayang: {jam}")
     print("Kursi: ", end="")
-    print(*kursi_pilihan_duduk, sep=", ")
+    print(*pilihan_kursi, sep=", ")
     print("Total Pembayaran: Rp.", hitung_kursi * mengambil_harga_film(film))
 
 def mengambil_harga_film(film):
