@@ -15,7 +15,7 @@ def daftar_film():
     print("4. Hati Suhita (Rp. 30.000)")
     
 def lihat_waktu_tayang(film):
-     waktu = jam_tayang.get(film)
+    waktu = jam_tayang.get(film)
     if waktu is not None:
         insertion_sort(waktu)
         print("Jam Tayang:")
@@ -23,8 +23,6 @@ def lihat_waktu_tayang(film):
             print(f"{i + 1}. {jam}")
     else:
         print("Film tidak valid.")
-    else:
-        print("Film tidak ada.")
 
 def pesan_tiket(film, jam, hitung_kursi, kursi, pilihan_kursi):
     print("Tempat Duduk yang Tersedia:")
@@ -84,3 +82,23 @@ def main():
             else:
                 print("Pilihan Anda Tidak Valid")
                 continue
+        restart = input("Apakah Anda Ingin Melanjutkan (y/n)? : ")
+        if restart.lower() != "y":
+            print("Terima Kasih Telah Memesan")
+            break
+
+jam_tayang = {
+    "1": ["08:00", "16:00", "20:00"],
+    "2": ["10:00", "13:00", "20:00"],
+    "3": ["22:00", "15:00", "09:00"],
+    "1": ["08:00", "20:00",],
+}
+kursi1 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+kursi2 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+kursi3 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+kursi4 = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+pilihan_kursi1 = []
+pilihan_kursi2 = []
+pilihan_kursi3 = []
+pilihan_kursi4 = []
+main()
