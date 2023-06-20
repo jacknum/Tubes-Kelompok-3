@@ -15,19 +15,14 @@ def daftar_film():
     print("4. Hati Suhita (Rp. 30.000)")
     
 def lihat_waktu_tayang(film):
-    waktu_tayang = {
-        "1": ["08:00", "23:00", "16:00"],
-        "2": ["14:00", "10:00", "20:00"],
-        "3": ["21:00", "15:00", "09:00"],
-        "4": ["13:00", "19:00", "11:00"]
-    }
-
-    waktu = waktu_tayang.get(film)
+     waktu = jam_tayang.get(film)
     if waktu is not None:
         insertion_sort(waktu)
-    print("Jam Tayang: ")
-    for i, jam in enumerate(waktu):
-        print(f"{i + 1}. {jam}")
+        print("Jam Tayang:")
+        for i, jam in enumerate(waktu):
+            print(f"{i + 1}. {jam}")
+    else:
+        print("Film tidak valid.")
     else:
         print("Film tidak ada.")
 
