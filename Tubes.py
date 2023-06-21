@@ -18,7 +18,7 @@ def lihat_waktu_tayang(film):
     waktu = jam_tayang.get(film)
     if waktu is not None:
         insertion_sort(waktu)
-        print("Jam Tayang:")
+        print("\nJam Tayang:")
         for i, jam in enumerate(waktu):
             print(f"{i + 1}. {jam}")
         return True
@@ -51,7 +51,7 @@ def pesan_tiket(film, jam, hitung_kursi, kursi_terpesan, pilihan_kursi):
 
     if len(pesanan_kursi) == hitung_kursi:
         pilihan_kursi.extend(pesanan_kursi)  # Menambahkan pesanan kursi ke dalam pilihan_kursi
-        nama_pengunjung = input("Masukkan nama Anda: ")
+        nama_pengunjung = input("\nMasukkan nama Anda: ")
         total_harga = hitung_kursi * ambil_harga_film(film)
         if hitung_kursi > 5:
             diskon = total_harga * 0.05  # Menghitung jumlah diskon (5% dari total harga)
@@ -84,7 +84,7 @@ def main():
 
         if lihat_waktu_tayang(pilihan_film):
             jam_choice = input("Pilih jam tayang: ")
-            hitung_kursi = int(input("Berapa kursi yang Anda butuhkan? "))
+            hitung_kursi = int(input("\nBerapa kursi yang Anda butuhkan? "))
 
             if pilihan_film in jam_tayang and jam_choice in jam_tayang[pilihan_film]:
                 if pesan_tiket(pilihan_film, jam_choice, hitung_kursi, kursi_terpesan, pilihan_kursi):
