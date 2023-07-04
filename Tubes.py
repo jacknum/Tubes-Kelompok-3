@@ -17,7 +17,7 @@ def daftar_film():
 def lihat_waktu_tayang(film):
     waktu = jam_tayang.get(film)
     if waktu is not None:
-        insertion_sort(waktu)
+        insertion_sort(waktu):
         print("\nJam Tayang:")
         for i, jam in enumerate(waktu):
             print(f"{i + 1}. {jam}")
@@ -25,7 +25,7 @@ def lihat_waktu_tayang(film):
     else:
         print("Film tidak valid.")
         return False
-
+        
 def pesan_tiket(film, jam, hitung_kursi, kursi_terpesan, pilihan_kursi):
     print("Tempat Duduk yang Tersedia:")
     for row in kursi:
