@@ -17,7 +17,7 @@ def daftar_film():
 def lihat_waktu_tayang(film):
     waktu = jam_tayang.get(film)
     if waktu is not None:
-        insertion_sort(waktu):
+        insertion_sort(waktu)
         print("\nJam Tayang:")
         for i, jam in enumerate(waktu):
             print(f"{i + 1}. {jam}")
